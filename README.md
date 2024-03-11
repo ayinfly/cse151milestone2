@@ -1,4 +1,9 @@
-# Preprocessing
+# Table of Contents
+
+
+
+# Milestone 2 Notes:
+## Preprocessing
 ![](/images/df.png)
 ![](/images/dfdtypes.png)
 
@@ -33,7 +38,7 @@ In our dataset, we have one NA value for `Study Hours Per Week`, so we will dete
 For the `Average Grade Expected` and `Average Grade Received` features, we have a significantly greater number of NA values 1486 and 17628 respectively. To handle these cases, we will create a map that has the department, course, and suffix of unique courses and then a column that includes the mean of the average grade expected and the mean of the average grade received for all iterations of that unique course. Then, we will iterate through the original dataframe, replacing any NA values in Average Grade Expected and Average Grade Received features with the mean values in our mapping for that course. This should be okay since students tend to perform relatively similarly across quarters, so our estimated value will be a fair approximator of how students actually might have performed during that particular iteration of the class taking into account any variability in performance caused by professors or external conditions (i.e. strikes).
 
 
-# Normalization
+## Normalization
 We will be normalizing our input features using the min-max normalization technique in order to improve the performance of the regression ANN we will be producing to predict student success (i.e. average grade received), enjoyment (i.e. % recommend the class), and engagement (i.e. study hours per week).
 
 
@@ -49,7 +54,7 @@ We will be normalizing our input features using the min-max normalization techni
 All of the steps outlined in the preprocessing plans section above has been completed. We did run into some issues in imputing, namely in instances where when we tried to compute the mean of all iterations of a particular class with NaN values, we would get another NaN value because ALL other iterations of that class also had NaN values for the feature we are trying to take the mean of. For observations (classes) with these properties, we have addressed them by taking the mean of all classes in that department. Despite doing so, there were still a few classes with NaN values for some feature columns. So we remedied that by just assigning it the value equal to the mean of all observation values in the dataset for the column with the issue. This has reduced the number of NaN values in our dataset to 0.
 
 ## [Train your first model](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=rfSryuY1OVNC&line=1&uniqifier=1)
-Our first model is an DNN with 7 hidden layers all using the Relu activation function and with a decreasing number of nodes in each layer. Since we are doing regression where we need to predict a continuous value, the output layer has no activation function. We will be using the adam optimizer and mse as our loss function. Early stopping and checkpointing has also been set up for the model's fit function.
+Our first model is an DNN with 5 hidden layers all using the Relu activation function and with a decreasing number of nodes in each layer. Since we are doing regression where we need to predict a continuous value, the output layer has no activation function. We will be using the adam optimizer and mse as our loss function. Early stopping and checkpointing has also been set up for the model's fit function.
 
 ## [Evaluate your model compare training vs test error](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=vycnE1NkOfQx&line=1&uniqifier=1)
 Our model's initial performance was quite good. Our model managed a MSE loss value of 0.006070451192523905 on the training data and a value of 0.0059246622968575175 on the test. Thus, it looks like our model performs pretty similarly when presented with unseen test data as it does with the data it was trained on. In fact, the results seem to indicate that the model performs slightly better with the provided test data than the training data as the test MSE is slightly lower than the training MSE. We belive this is probably just due to luck (the seed that we used to split the data) and that if we performed k cross fold validation we may see slightly different results. Ultimately, though the loss is not perfect (MSE is not 0) for either dataset, the loss values that we do get are rather low, which suggests that our model would do a good job at preducting the average GPA received for a class given the values for "Total Enrolled in Course", "Percentage Recommended Professor", "Study Hours per Week", and "Average Grade Expected". These are quite promising results for our first model!
@@ -78,4 +83,63 @@ Overall, it seems that our first model is rather successful at predicting averag
 
 - Changing the normalization type. Standardizing the input data may result in better performance. We will experiment with this for the next milestone.
 
+# Milestone 4 Notes:
 
+## [Evaluate your data, labels and loss function. Were they sufficient or did you have have to change them.](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IbOaMV6pfldE)
+
+Looking at the performance of our first model, it would seem that our initial configuration of the data set and DNN yielded promising results. Our reported mse loss (for both training and validation) was very low (<= 0.0128), so we can probably just get away with leaving the configuration as is, but we think we can do better. To achieve this, we are planning on performing Hyperparameter tuning and K-fold cross validation to improve our existing model and check that it was not overfit to our traning data or that our seed for the test data wasn't just very lucky. Moreover we'll be incorporating other features that we left out of the training/test dataset used for model 1 that we think may help to reduce the loss. Namely, we'll try to incorporate the department and class number (and suffixes) into our dataset as we know intuitively that different departments have varying difficulties and higher number classes (upper divs) tend to be harder than lower divs. Likewise, certain courses in a series may be harder than others, so incorporating the course suffix may help our model's peformance.
+
+Thus, we will be:
+
+- changing our data to include more features to increase differentiability
+- keeping our loss function the same (mse) as it seemed to produce good results in model 1
+- keeping the labels the same (technically there aren't any labels since our output values are continuous values and we won't be changing it in any way)
+
+
+## [Train your second model](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=Zy-bSuGifx_j)
+
+To train our second model, we first performed hyperparameter tuning on our model from the previous milestone. Given time constraints, we opted to only tune the activation functions for each layer and optimizers. This resulted in 96 unique permutations to assess. Running the hyperparamter tuner yielded that the optimal combination was (from the first to last hidden layer) tanh, relu, tanh, relu, tanh with the adam optimizer. These findings were then used to construct model 2 of our GPA predictor DNN.
+
+## [Evaluate your model compare training vs test error](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=qVxYXsjsf0UE)
+
+Our new model's training and test error were surprisingly similar. In fact, evaluating the MSE for both reveals the following: 
+```
+MSE Train: 0.008263694997974086
+MSE Test: 0.008107799167541802
+```
+
+Furthermore, the results of doing K-fold cross validation with 5 folds gives us these scores:
+```
+[0.00672934, 0.0063089 , 0.00598459, 0.00601308, 0.00585237]
+```
+
+
+Taking all of these into consideration, our 2nd model exhibits about a 1.5-2x reduction in the MSE compared to our model for milestone 3!
+
+## [Where does your model fit in the fitting graph, how does it compare to your first model?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=BcBOnZd9f8VN)
+
+![](/images/model_2_graph.png)
+
+While there is some divergence (as evident by the varying peaks and valleys in the validation loss), they do not deviate too far from the training loss and show a general trend downwards that mirrors it as well. Likewise, since the loss values are so low and are appearing to stabilize at a low value for both the training and validation data, this tells us that we are not underfitting. Morever the validation loss does not show a consistent increase while the training loss decreases as the number of epochs increases. Overfitting may be starting to occur as evident by the small increase in the val_loss in the final epoch, but it could also just be a one off event (there are several small spikes upwards in the val_loss). Thus, we'd argue that overfitting is probably not occurring to a degree significant enough to impair the generalizability of our model, which means that our model sits somewhere in the good fit zone, much like what we observed in our model 1!
+
+## [Did you perform hyper parameter tuning? K-fold Cross validation? Feature expansion? What were the results?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ZN57u13ogH5C&line=3&uniqifier=1)
+
+We performed hyperparameter tuning and K-fold validation but no feature expansion (technically we did increase the number of features by adding features that were already in our dataset, but didn't create any new ones by raising values by a power). Hyperparameter tuning was done to tune the activation function for each layer and the optimizer and K-fold validation was performed with 5 splits. The results of doing so reduced our training mse loss from ~0.0128 to 0.008, approximately a 1.6x reduction! Not only that, but the results of the K-fold cross validation reveals that the model's performance on various test datasets hovers around the same value. This is promising as it means our model and its weights generalizes well to unseen data.
+
+## [What is the plan for the next model you are thinking of and why?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=Vq8Lzd6KgLGA)
+
+We're going to experiment with creating a classification DNN instead of a regression one. Technically, we could proceed with another regression DNN and perform more hyperparameter tuning, but the loss is so low already it might not be worth it (not to mention the exponential amount of time it would take to expand the tuning parameters). Moreover, we think the reason why the loss is really small is because the range of possible output values is quite small to begin with (something between 0-4). Thus, whatever our model predicts is likely to not be that far off from the true value from a relative sense, which may be throwing off our interpretation of the model's performance. Besides, when students check capes to evaluate classes and professors, they don't really care about the specific GPA received, but rather the letter grade. So for our 3rd model, we're planning on making some modifications to our data set (label encoding) and changing the DNN's architecture (i.e. the loss function) in order to perform classification. The target will still be GPA, but we will first need to label encode it into discrete values in order to make it something that we can predict (since letter grades are ordinal). Thus, the goal with the third model is to see if we can still produce a model that accurately predicts the grade letter received, rather than the specific GPA. Like model 2, we will determine what the optimal activation functions and optimizers are for model 3 using hyperparameter tuning and evaluate overfitting using K-fold validation.
+
+## [Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform to your first and why?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=SDel_O1FgPaQ)
+
+Overall, Model 2 appears to be an improvement compared Model 1 since we were able to reduce the training MSE loss by 1.5-2x. This was accomplished by
+
+- extending our input data to also take into account a course's department, course number, and sourse suffix for extra differenitability.
+
+- utilizing hyperparameter tuning to determine the optimal selection of activation functions and the error optimizer, which were then used in the construction of this milestone's DNN.
+
+- evaluating overfitting by using K-fold validation which revealed that our model was performing similarly to unseen testing data from fold to fold, a good sign that overfitting was not significantly occurring. (this was not done to the model in milestone 3)
+
+Together, this seems to indicate that our model is an overall improvement to model 1, becoming more "accurate" (reduced loss), while simultantously still remaining generalizable, which is exactly what we wanted to happen!
+
+We'd imagine that we could further optimize the performance of this model by performing more hyperparameter tuning. Due to time constraints, we could only let the tuner run for a little over an hour, but we'd imagine that if we had more time (and if google decides to not time us out), we could tune more parameters like the number of layers, the number of nodes in each layer, more activation/loss functions, and the learning rate to further reduce the loss. That being said, since the loss is already so low, we'd imagine that further optimizations would follow the law of diminishing returns. Thus, it would be better to consider a different kind of model (i.e. classification) to predict grades instead and see how it stacks up to this one.
