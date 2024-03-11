@@ -69,7 +69,7 @@ Per our milestone 1 submission, we aim to create 2 additional models from our da
 
 ## [Conclusion section: What is the conclusion of your 1st model? What can be done to possibly improve it?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=i5FkYAmuOss6&line=3&uniqifier=1)
 
-Overall, it seems that our first model is rather successful at predicting average GPAs received as evident by the low loss of its outputs in both trianing, test, and validation data. However, we feel that there is more work that we can do. Here is a list of some of the plans that we have to improve the performance of our model:
+Overall, it seems that our first model is rather successful at predicting average GPAs received as evident by the low loss of its outputs in both training, test, and validation data. However, we feel that there is more work that we can do. Here is a list of some of the plans that we have to improve the performance of our model:
 
 - Hyperparameter tune. Mess around with different numbers of nodes in each layer, activation functions, loss functions, optimizers, and learning rates. Since we have some time before the next milestone is due, we can definitely have a member of our group tune our existing model to see if changing anything can help us reduce our loss
 
@@ -98,7 +98,7 @@ Thus, we will be:
 
 ## [Train your second model](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=Zy-bSuGifx_j)
 
-To train our second model, we first performed hyperparameter tuning on our model from the previous milestone. Given time constraints, we opted to only tune the activation functions for each layer and optimizers. This resulted in 96 unique permutations to assess. Running the hyperparamter tuner yielded that the optimal combination was (from the first to last hidden layer) tanh, relu, tanh, relu, tanh with the adam optimizer. These findings were then used to construct model 2 of our GPA predictor DNN.
+To train our second model, we first performed hyperparameter tuning on our model from the previous milestone. Given time constraints, we opted to only tune the activation functions for each layer and optimizers. This resulted in 87 unique permutations to assess. Running the hyperparamter tuner yielded that the optimal combination was (from the first to last hidden layer) tanh, tanh, tanh, tanh, relu with the adam optimizer. These findings were then used to construct model 2 of our GPA predictor DNN.
 
 ## [Evaluate your model compare training vs test error](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=qVxYXsjsf0UE)
 
@@ -114,7 +114,7 @@ Furthermore, the results of doing K-fold cross validation with 5 folds gives us 
 ```
 
 
-Taking all of these into consideration, our 2nd model exhibits about a 1.5-2x reduction in the MSE compared to our model for milestone 3!
+Taking all of these into consideration, our 2nd model exhibits about a 1.5-2x reduction in the MSE compared to our model for milestone 3! Additionally, this consistency in K-fold cross validation suggests that our model is not overfitting and is working well with unseen data, which is exactly what we want!
 
 ## [Where does your model fit in the fitting graph, how does it compare to your first model?](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=BcBOnZd9f8VN)
 
