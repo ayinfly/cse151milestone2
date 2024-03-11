@@ -102,7 +102,7 @@ To train our second model, we first performed hyperparameter tuning on our model
 
 ## [Evaluate your model compare training vs test error](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=qVxYXsjsf0UE)
 
-Our new model's training and test error were surprisingly similar. In fact, evaluating the MSE for both reveals the following: 
+Our new model's training and test error were surprisingly similar, but much better than what we got for model 1. In fact, evaluating the training and test MSE for this model reveals the following: 
 ```
 MSE Train: 0.008263694997974086
 MSE Test: 0.008107799167541802
@@ -112,7 +112,6 @@ Furthermore, the results of doing K-fold cross validation with 5 folds gives us 
 ```
 [0.00672934, 0.0063089 , 0.00598459, 0.00601308, 0.00585237]
 ```
-
 
 Taking all of these into consideration, our 2nd model exhibits about a 1.5-2x reduction in the MSE compared to our model for milestone 3! Additionally, this consistency in K-fold cross validation suggests that our model is not overfitting and is working well with unseen data, which is exactly what we want!
 
@@ -140,6 +139,6 @@ Overall, Model 2 appears to be an improvement compared Model 1 since we were abl
 
 - evaluating overfitting by using K-fold validation which revealed that our model was performing similarly to unseen testing data from fold to fold, a good sign that overfitting was not significantly occurring. (this was not done to the model in milestone 3)
 
-Together, this seems to indicate that our model is an overall improvement to model 1, becoming more "accurate" (reduced loss), while simultantously still remaining generalizable, which is exactly what we wanted to happen!
+Together, this seems to indicate that our model is an overall improvement to model 1, becoming more "accurate" (reduced loss), while simultantously still remaining generalizable, which is exactly what we wanted to happen! We imagine that hyperparameter tuning did the bulk of the work for us by brute force testing different combinations of the activation functions and optimizers so that we could figure out which ones were best and in what order.
 
 We'd imagine that we could further optimize the performance of this model by performing more hyperparameter tuning. Due to time constraints, we could only let the tuner run for a little over an hour, but we'd imagine that if we had more time (and if google decides to not time us out), we could tune more parameters like the number of layers, the number of nodes in each layer, more activation/loss functions, and the learning rate to further reduce the loss. That being said, since the loss is already so low, we'd imagine that further optimizations would follow the law of diminishing returns. Thus, it would be better to consider a different kind of model (i.e. classification) to predict grades instead and see how it stacks up to this one.
