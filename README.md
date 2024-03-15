@@ -254,3 +254,71 @@ The importance of this study comes from being able to provide a model to guide a
 # Conclusion
 
 # Collaboration
+
+## Owen:
+- Wrote initial code for data preprocessing
+- Majority of READMEs for each milestone
+- Majority of code for training and evaluating DNN models
+- Commentary for DNN models in notebook
+- Final writeup: methods, results, and discussion for DNN models, data exploration, and data preprocessing (converted from Google Doc to README.md)
+
+## Darryl:
+- Primary coder for initial preprocessing section and all Regression models (linear and polynomial)
+- Helped write proposal revision for Milestone 1 resubmission
+- Data preprocessing coding and descriptions: label encoded course suffix, imputed NaNs, normalized data
+- Regression models: code under Regression subheader
+- Data preprocessing code for KNN model
+- Final write-up: methods, results, and discussion for polynomial regression model
+- Attended and contributed to all team meetings; frequented TAs OH for project direction clarity
+
+## Milana:
+- Attended majority of group meetings
+- Majority of plotting for preprocessing milestone 1
+- Initial linear regression model for model 1
+- Initial KNN for model 2
+- Analysis for K-fold cross validation for linear regression model
+- Hyperparameter tuning, DNN model coding, and plotting results for first "version" of model 3
+- Contributed to final write-up, especially discussion sections for model 3, regression models 1 & 2, formatting/image links, and conclusion
+
+## Andrew:
+- Set up server for communication and GitHub for results
+- Initial write-up for Milestone 1
+- Data exploration for preprocessing Milestone 2
+- Created fitting graphs for models and discussed comparisons regarding loss
+- Worked on final Introduction, results, conclusion, and writeup conversion to Markdown
+
+## Ian:
+- Attended every group meeting
+- Contributed to initial data exploration and writeup
+- General revision and cleanup of earlier milestones
+- Worked on write-ups for Model 2 (Linear Regression) for Milestone 3
+- Contributed to major revision of Linear Regression write-up and transition to three iterations
+- Explored first linear regression model more in-depth with team
+- General revision and error-checking for every section of final write-up
+
+## Luke:
+- Preliminary data exploration on CAPES dataset
+- Documented introduction and research intent
+- Provided context for Linear Regression model in write-up
+- Discussed approaches to improve model performance without overfitting
+- Added analytical insights to Linear Regression model in conclusion section
+
+## Enrique:
+- Attended every group meeting
+- Took notes for one meeting for absent members
+- Contributed to part of the final write-up
+
+## Vincent:
+- Attended all group meetings and participated in brainstorming
+- Worked with Andy on coding three KNN models and plotting results
+- Proofread models and final write-up, correcting errors
+- Wrote models, results, and discussion section for KNN Model
+- Contributed to conclusion by comparing all models and discussing DNN shortcomings
+
+## Andy:
+- Adjusted preprocessing data for KNN model
+- Co-wrote 3 KNN model iterations with Vincent
+- Tested optimal k values and plotted histograms for model accuracy
+- Contributed to discussion section analyzing model performances
+- Attended most group meetings and discussed model selection
+- Revised previous code for smooth functioning
