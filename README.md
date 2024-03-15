@@ -137,6 +137,7 @@ The importance of this study comes from being able to provide a model to guide a
     * ![](images/results_corr.png)
   * Viewing the distribution of the values in each feature revealed the following skews
     * ![](images/results_dist.png)
+  
 * ## Pre-Processing:
     * ### Encoding:
       * Prior to encoding our dataset, the majority of the features contained objects as their value.
@@ -156,19 +157,59 @@ The importance of this study comes from being able to provide a model to guide a
       * The feature `Course` was dropped from the dataset after being processed and expanded into `Department`, `Course Number`, and `Course Suffix` features.
       * This was done while encoding the data. Thus, the previews of the dataset used to show the state of the dataset after the applying the different techniques exclude these values.
 * ## Model 1:
-    
+    * Training vs Validation Loss Graph:
+      * ![](images/results_model1.png)
+    * Training vs Test MSE:
+      * ```
+        MSE Train: 0.012811824793743347
+        MSE Test: 0.012531321231611235
+        ```
 * ## Model 2:
+    * Training vs Validation Loss Graph:
+      * ![](images/results_model2.png)
+    * Training vs Test MSE:
+      * ```
+        MSE Train: 0.006345696507123405
+        MSE Test: 0.006237075743043597
+        ```
+    * Losses per Fold for K-Fold Cross Validation 
+      * ```
+        array([0.00620253, 0.00730672, 0.00649318, 0.00584978, 0.00591005])
+        ```
 * ## Model 3:
+    * Training vs Validation Loss Graph:
+    * Training vs Test Classification Report:
 * ## Alternative Models
+    * Graphs and figures for our alternative models can be found [here]()
 
 # Discussion
 * ## Data Exploration:
+* As our goal is to build a DNN that predicts student grades, we felt that it was first important to explore our dataset to find any correlations between other features and our target so that we could determine what inputs to include in our model. Thus, we made use of the corr() method in pandas to compute the correlation coefficient between all the features in our dataset and plotted them using heatmap() from seaborn with a diverging color scale. This made it easy to visually spot which features were more strongly correlated with “Average GPA Received” and whether the association was positive or negative. After doing so, we identified that the features “Average Grade Expected”, “Study hours per week”, “Percentage Recommended Class”, “Percentage Recommended Professor” had strong or medium levels of correlation with our target, which gave us our inputs.
+> * Note: we also decided to add the feature “Total Enrolled In Class” as an input even though it had a weak negative correlation (-0.22) with our target. This came from discussion about whether or not students generally do better in smaller courses or ones with a larger amount of students. Thus, we felt that it was a good idea to also include it as a possible input for our model. In retrospect, we probably should have only selected features with a medium or strong correlation to our target feature as that would’ve likely made it easier for our model to achieve better predictive performance (by eliminating noise caused by features that aren’t that “useful”).
+
 * ## Pre-Processing:
     * ### Encoding:
+      * Encoding was performed because the majority of the features in our dataset contained strings as values. Thus, in order to use them as inputs for our models, we needed to turn them into numbers first. Fortunately, many of them were easy to convert into a numeric value because the number we wanted was already contained within the string. This meant that we were able to write some RegEx to extract the numeric values we needed from the problematic columns. We then overwrote those columns with their extracted numeric values. This was applied to the columns “Percentage Recommended Class”, "Percentage Recommended Professor”, “Average Grade Expected” and “Average Grade Received”.
+
+      While these were the only features we really needed to encode, we figured that we might as well encode some extra features in the dataset in case we needed to use them later. This led us down a path to encode the “quarter” and “course” feature, which was a bit more complicated. 
+        
+      To encode “Quarter”, we noticed that the entries under this feature were all in the format XXYY where XX referred to the quarter and YY referred to the year a particular course was offered. This meant that we could again write some RegEx to separate out the quarter and year into their own features “Quarter” and “Year”. As “Year” was already a number, we simply added 2000 to it to make it more interpretable.  To handle ”Quarter” we just performed label encoding on it as quarters tend to have an order associated with them (fall -> winter -> spring…).
+
+      To encode “Course” we observed that entries for this feature were basically all in the format Department + Course Number + Course Name. Since we really only needed the department name and course number to identify a class, we realized that we could just ignore the course name. This meant that we could encode values in “Course” by separating out the department and the course numbers into their own columns (department and course numbers respectively). However, since some courses had a suffix assigned to them (MATH 20A), we also had to extract that too and create a new column, suffix. As with before, this was achieved with RegEx. From there, the course numbers themselves could safely just be converted into integers, but we had to encode the department and suffixes as they were entirely strings. Since there were quite a few departments and suffixes, we just label encoded them by assigning a numeric value to each based on their lexicographic ordering instead of doing one hot encoding to reduce the number of features in our dataset.
+
     * ### Imputation:
+      * The choice to try to impute missing data was driven by the discovery that around ~27% of our dataset contained missing values. While we considered dropping them since our dataset was sufficiently large enough, we decided to try to impute as many entries as possible before resorting to dropping.
+      * Once we learned that the bulk of the missing values were for the columns ‘Average Grade Expected and “Average Grade Received” we reasoned that we could fill those values by looking at other instances of the same class (as identified by having the same department number, course number, and course suffix) and replace the missing value with the average of the values from said classes. This technique managed to reduce the number of observations with missing values to <10% of our dataset. While we figured we could just stop there, we decided to look a bit further into it in between milestones and discovered that some classes only occurred for one instance. This meant that we couldn’t compute a value to replace the missing one. Fortunately, we realized we could just utilize the same technique as before, but with a slight modification. While less ideal, we could just look at other classes in the entire department and generate any replacement value by averaging the values observed in said classes. Failing that (i.e. if the department only had the class with the missing value) the entire dataset,we could still compute a value by taking the average of all the values for the feature with a missing value. This basically served as a catch all filter that imputed all of the data with missing values in our dataset! Thus, we were able to avoid the need to drop any entries from our dataset.
+
     * ### Normalization:
-    * ### Encoding:
+      * We chose to min-max normalize non-label values in our dataset as it was mentioned in class that normalizing data was necessary if we ever needed to perform stochastic gradient descent optimization since it is sensitive to scale.
+
+      * The decision to choose min-max normalization in particular was made because some of our features already appeared to be min max normalized once we converted them into numeric values (“Percentage Recommended Class” and "Percentage Recommended Professor all had values between 0 and 1), thus we figured we might as well choose to min max normalize the rest of our data.
+  
     * ### Dropped Columns:
+      * The features “Instructor and Evaluation URL” were dropped from our dataset. This was because “Evaluation URL” just contained links to the CAPEs report that corresponded to a particular entry. While the report had a bit more information that wasn’t in the dataset, what we had already contained all the key information pertaining to class and enrollment demographics, which is what we were interested in in the first place. 
+      * Additionally, we felt that it was appropriate to exclude instructor names from our analysis for privacy and ethical reasons. This is because our goal is to develop a model that the school and other students can use to understand and improve student success (as measured by grades) and we wouldn't want a particular professor to have an influence on our model as that might lead to favoritism or other workplace related issues. Since we already have a measure of how much the students like their professor in Percentage Recommended Professor, we figured we could safely strip away the name and just have a measure of how much students enjoy their professor without having any names attached.
+
 * ## Model 1:
 * ## Model 2:
 * ## Model 3:
