@@ -13,10 +13,11 @@ The importance of this study comes from being able to provide a model to guide a
     * df.info() revealed that most features in our dataset contained objects (strings) instead of numeric values
     * pd.describe() revealed that approximately 27% of our dataset had missing values
     * Creating a correlation heatmap using df.corr() and sns.heatmap() revealed that:
-        * ‘Average Grade Expected’ is very strongly correlated (positively) with “Average Grade Received” 
-        * “Study hours per week” is moderately negatively correlated with  ‘Average Grade Expected and  “Average Grade Received” 
-        * “Percentage Recommended Class” and “Percentage Recommended Professor” is moderately positively correlated with ‘Average Grade Expected and  “Average Grade Received”
-        * Total enrolled in course was weakly negatively correlated with “Average Grade Received” 
+        * `Average Grade Expected` is very strongly correlated (positively) with `Average Grade Received` 
+        * `Study hours per week` is moderately negatively correlated with  `Average Grade Expected` and  `Average Grade Received`
+        * `Percentage Recommended Class` and `Percentage Recommended Professor` is moderately positively correlated with `Average Grade Expected` and  `Average Grade Received`
+        * Total enrolled in course was weakly negatively correlated with `Average Grade Received`
+    * Plotting the distribution of the values using hist() revealed the data was largely skewed in one direction for most features. 
 
 * ## Pre-Processing:
     The following techniques were used to process the CAPEs dataset:
@@ -108,7 +109,7 @@ The importance of this study comes from being able to provide a model to guide a
   The model was evaluated for performance and signs of overfitting by plotting training vs evaluation loss and by comparing the model’s accuracy, recall, and precision for various classes using sklearn’s classification report for both testing and training data.
 
 * ## Alternative Models
-  As an exercise, we've prepared several models using various other concepts covered in class. While they are not our main model, these models serve as a base of comparison for our DNNs so we have another way to compare their performance. So as to increase the readibility of the README, detailed descriptions, code, and graphs related to these models will be excluded, though we will provide a link to them in the notebook.
+  As an exercise, we've prepared several models using various other concepts covered in class. While they are not our main model, these models serve as a base of comparison for our DNNs so we have another way to compare their performance. So as to increase the readibility of the README however, detailed descriptions, code, and graphs related to these models will be excluded, though we will provide a link to them in the notebook.
 
   A brief summary of what they are has been provided below for completeness:
     * Regression:
@@ -118,23 +119,44 @@ The importance of this study comes from being able to provide a model to guide a
         * Hyperparameter tuning was performed to evaluate the LinearRegression() model's performance when given different inputs. The best one was then evaluated using K-fold cross validation of varying degrees.
       * Version 3:
         * Used sklearn's PolynomialFeatures() to construct regression models of degree ranging from 1-5
-    KNN:
+    * KNN:
       * Version 1:
-        *
+        * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 50
       * Version 2:
-        * 
+        * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 200
       * Version 3:
-        *
+        * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 500
 
 # Results
 * ## Data Exploration:
+  * df.info() revealed that most features in our dataset contained objects (strings) instead of numeric values
+    * ![](images/results_info.png)
+  * pd.describe() revealed that approximately 27% of our dataset had missing values
+    * ![](images/results_missing.png)
+  * Creating a correlation heatmap using df.corr() and sns.heatmap() revealed the following correlation coefficients: 
+    * ![](images/results_corr.png)
+  * Viewing the distribution of the values in each feature revealed the following skews
+    * ![](images/results_dist.png)
 * ## Pre-Processing:
     * ### Encoding:
+      * Prior to encoding our dataset, the majority of the features contained objects as their value.
+      * After encoding the features mentioned in the methods section, all of the features in the dataset were converted to either integers or floats
+      * A before and after view of the dataset can be found below
+        * Before:
+        * ![](images/results_encoding_before.png)
+        * After:
+        * ![](images/results_encoding_after.png)
     * ### Imputation:
+      * Applying the technique outlined in the methods section reduced the number of rows with missing data from 19,115 all the way to 0.
     * ### Normalization:
-    * ### Encoding:
+      * Min Max normalization was applied to non-categorical columns. The resulting dataset can be seen below:
+        * ![](images/results_normalization.png)
     * ### Dropped Columns:
+      * The features `Instructor` and `Evaluation URL` were dropped from our dataset
+      * The feature `Course` was dropped from the dataset after being processed and expanded into `Department`, `Course Number`, and `Course Suffix` features.
+      * This was done while encoding the data. Thus, the previews of the dataset used to show the state of the dataset after the applying the different techniques exclude these values.
 * ## Model 1:
+    
 * ## Model 2:
 * ## Model 3:
 * ## Alternative Models
