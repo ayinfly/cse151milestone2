@@ -182,7 +182,7 @@ The importance of this study comes from being able to provide a model to guide a
     * Training vs Test Classification Report:
       * ![](images/results_model3_t.png)
 * ## Alternative Models
-    * Graphs and figures for our alternative models can be found [here]()
+    * Graphs and figures for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing)
     * The results of the best models are displayed below for convenience:
       * Regression
         * Utilizing a degree of 4 produces a model with a test MSE loss of 0.07478621
@@ -246,7 +246,7 @@ The importance of this study comes from being able to provide a model to guide a
   * After doing this additional data preprocessing, we tried model 3 again and the accuracy improved significantly by about 20%. The new accuracy for model 3 is approximately 63-65%. Overall, we saw a significant improvement in the performance of model 3 where we used categorical cross entropy as the loss function when we simplified the classes further and performed oversampling along with hyperparameter tuning. This really showed us the importance of evaluating the model and always taking a look back at the data to understand why a model might be performing in a specific way.
 
 * ## Alternative Models
-  * Discussion for our alternative models can be found [here]() 
+  * Discussion for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing) 
 
   * A summary comparing the results of said models to our DNNs has been provided below:
     * Interestingly, it appears that our best regression DNN outperforms our best polynomial regression model by quite a large margin (~0.007 vs ~0.075, a >10x difference in MSE loss). However, our classification DNN performs worse than the best KNN classifier we were able to produce. While we should admit that the input parameters are different between these models, it's interesting to see that given the same dataset, models with different architectures can perform better than others. We suppose the greatest takeaway is that a DNN is not the solution for everything. While it can be better at one task, there are other models that perhaps lend themselves better to particular tasks.
