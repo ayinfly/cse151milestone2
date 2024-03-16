@@ -120,7 +120,7 @@ The importance of this study comes from being able to provide a model to guide a
     * ### [Regression:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=zNk0x94wefFW)
       * [Version 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=urrWbi4XlcO2&line=1&uniqifier=1)
         * sklearn's LinearRegression() model was used to create a linear regression and was evaluated using K-fold cross validation of varying degrees.
-      * [Versin 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=nz-QTWV-41s-&line=1&uniqifier=1)
+      * [Version 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=nz-QTWV-41s-&line=1&uniqifier=1)
         * Hyperparameter tuning was performed to evaluate the LinearRegression() model's performance when given different inputs. The best one was then evaluated using K-fold cross validation of varying degrees.
       * [Version 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=VR3Bonloltmn&line=1&uniqifier=1)
         * Used sklearn's PolynomialFeatures() to construct regression models of degree ranging from 1-5
