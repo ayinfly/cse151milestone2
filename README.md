@@ -350,7 +350,7 @@ That being said. we think that a bigger performance gain could be achieved if we
 - Attended most group meetings and discussed model selection
 - Revised previous code for smooth functioning
 
-# Tarun:
+## Tarun:
 - Attended meetings for group work and helped with brainstorming ideas for our projects.
 - Assisted in initial preprocessing ideas.
 - Worked on Model 2 DNN for initial idea, it was later developed into something else.
