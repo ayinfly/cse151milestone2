@@ -181,7 +181,7 @@ The importance of this study comes from being able to provide a model to guide a
       * ```
         array([0.00620253, 0.00730672, 0.00649318, 0.00584978, 0.00591005])
         ```
-* ## [Model 3]:(https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IPxG5OibLu_Q)
+* ## [Model 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IPxG5OibLu_Q)
     * Training vs Validation Loss Graph:
       * ![](images/results_model3.png)
     * Training vs Test Classification Report:
