@@ -8,7 +8,7 @@ Moreover, we think that it’s cool that we get to utilize a dataset that many o
 The importance of this study comes from being able to provide a model to guide academic policy decisions which can enhance the quality of education, and foster an environment that supports and maximizes student success and learning enjoyment. As students ourselves, this project provided an opportunity to see how to utilize code and data related to academic performance to learn more about our own academic performance and uncover patterns in the data that can help us know what to look for to increase odds of student success. Having a good predictive model is important to highlight important patterns and behaviors that might not be clear to the human eye but are evident in the data. In other words, a good predictive model can be useful to develop improvements and predict future outcomes by uncovering patterns in the data.
 
 # **Methods**
-* ## Data Exploration:
+* ## [Data Exploration:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=9Wgqiln8b2Gq)
     The dataset was explored using a combination of functions available through the pandas and seaborn libraries. Below is a summary of what functions were used and what we learned about our dataset from them
     * df.info() revealed that most features in our dataset contained objects (strings) instead of numeric values
     * pd.describe() revealed that approximately 27% of our dataset had missing values
@@ -19,13 +19,13 @@ The importance of this study comes from being able to provide a model to guide a
         * Total enrolled in course was weakly negatively correlated with `Average Grade Received`
     * Plotting the distribution of the values using hist() revealed the data was largely skewed in one direction for most features. 
 
-* ## Pre-Processing:
+* ## [Pre-Processing:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ql2uSH6ICs2l)
     The following techniques were used to process the CAPEs dataset:
-    * ### Encoding:
+    * ### [Encoding:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ZC62Zdp8uKMJ)
       * Label encoding was performed on the columns `Percentage Recommended Class`, `Percentage Recommended Professor`, `Average Grade Expected` and `Average Grade Received` to convert them from strings into numeric values
       * The feature `Course`, containing details of a course’s department and course number, was processed to separate out the department, course number, and course suffix into their own columns. These individual features were then label encoded into numeric values and appended to our dataset under the names `Department`, `Course Number` and `Course Suffix` respectively.
 
-    * ### Imputation:
+    * ### [Imputation:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=GmKH15rIsQAO)
       * Prior to doing any imputing, our dataset contained missing values for the following features: ‘Study Hours Per Week’, ‘Average Grade Expected’, ‘Average Grade Received’
       * The following strategy was used to impute missing values:
         > “For every observation with a missing value for feature X, create a value for X by taking all observations with the **same department, course number, and suffix** (the same class), taking the values reported for feature X, taking the average of them, and setting that as the imputed value for X.
@@ -41,7 +41,7 @@ The importance of this study comes from being able to provide a model to guide a
 
       * Imputing missing data saved **~27%** of the dataset from being dropped for having missing values 
   
-    * ### Normalization:
+    * ### [Normalization:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=cg8WdV9-sDnQ)
       * Min-Max normalization was applied to all non-categorical data after the encoding and imputing steps
       * This impacted the following features: `Total Enrolled in Course`, `Percentage Recommended Class`, `Percentage Recommended Professor`, `Study Hours per Week`, `Average Grade Expected`, `Average Grade Received`, `Total CAPEs Given`
 
@@ -49,7 +49,7 @@ The importance of this study comes from being able to provide a model to guide a
       * The features `Instructor` and `Evaluation URL` were dropped from our dataset
       * The feature `Course` was dropped from the dataset after being processed and expanded into `Department`, `Course Number`, and `Course Suffix` features.
 
-* ## Model 1:
+* ## [Model 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=pEukt66cd708)
   Model 1 consists of a DNN aimed at doing regression. It takes as input, values for the features `Total Enrolled in Course`, `Percentage Recommended Class`, `Percentage Recommended Professor`, `Study Hours per Week`, and `Average Grade Expected` and outputs a continuous value for `Average Grade Received`. It is a dense, sequential model configured with 5 hidden layers with a decreasing number of nodes all using the relu activation function. It was compiled using mean squared error as the loss function using the adam optimizer.
 
   The code for the model can be found below:
@@ -69,7 +69,7 @@ The importance of this study comes from being able to provide a model to guide a
 
   The model was evaluated for performance and signs of overfitting by plotting training vs evaluation loss and by comparing the model’s training error (mse) with that of its testing error. 
 
-* ## Model 2:
+* ## [Model 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=BwvoiCvqdqry)
   Model 2 consists of a DNN aimed at doing regression. Like Model 1, it is a dense, sequential DNN outputting a continuous value for `Average Grade Received` but takes additional features on top of what model 1 already takes as input: namely `Department`, `Course Number`, and `Course Suffix`. Model 2 is also different in that hyperparameter tuning has been performed on its activation functions and optimizer with the objective of minimizing loss. The optimal results were then extracted and used to construct model 2.
   
   The code for the model (post hyper-parameter tuning) can be found below:
@@ -89,7 +89,7 @@ The importance of this study comes from being able to provide a model to guide a
 
   Like model 1, model 2 was evaluated for performance and signs of overfitting by plotting training vs evaluation loss and by comparing the model’s training error (mse) with that of its testing error. K-fold cross validation was also performed for the same purpose.
 
-* ## Model 3:
+* ## [Model 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IPxG5OibLu_Q)
 
   Model 3 consists of a DNN aimed at doing classification. Unlike the previous models, it aims to predict the letter grade of a class given the inputs `Total Enrolled in Course`, `Percentage Recommended Class`, `Percentage Recommended Professor`, `Study Hours per Week`, `Average Grade Expected` instead of a continuous value. To do this, the dataset was modified to convert the GPA values in `Average Grade Expected` into letter grades, which were then subsequently one hot encoded. Thus, model 3 serves as a DNN that predicts multi class outputs.
 
@@ -113,23 +113,23 @@ The importance of this study comes from being able to provide a model to guide a
 
   The model was evaluated for performance and signs of overfitting by plotting training vs evaluation loss and by comparing the model’s accuracy, recall, and precision for various classes using sklearn’s classification report for both testing and training data.
 
-* ## Alternative Models
+* ## [Alternative Models:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=mOE8-sKjbVwQ)
   As an exercise, we've prepared several models using various other concepts covered in class. While they are not our main model, these models serve as an additional base of comparison for our DNNs so we have another way to compare their performance. So as to increase the readibility of the README however, detailed descriptions, code, and graphs related to these models will be excluded, though we will provide a link to them in the notebook for completeness.
 
   A brief summary of what they are has been provided below:
-    * Regression:
-      * Version 1:
+    * ### [Regression:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=zNk0x94wefFW)
+      * [Version 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=urrWbi4XlcO2&line=1&uniqifier=1)
         * sklearn's LinearRegression() model was used to create a linear regression and was evaluated using K-fold cross validation of varying degrees.
-      * Version 2:
+      * [Versin 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=nz-QTWV-41s-&line=1&uniqifier=1)
         * Hyperparameter tuning was performed to evaluate the LinearRegression() model's performance when given different inputs. The best one was then evaluated using K-fold cross validation of varying degrees.
-      * Version 3:
+      * [Version 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=VR3Bonloltmn&line=1&uniqifier=1)
         * Used sklearn's PolynomialFeatures() to construct regression models of degree ranging from 1-5
-    * KNN:
-      * Version 1:
+    * ### [KNN:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=8OI-xsyRevky&line=1&uniqifier=1)
+      * [Version 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=BkuuX3RC5k87)
         * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 50
-      * Version 2:
+      * [Version 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ux33QWXBB8mu&line=4&uniqifier=1)
         * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 200
-      * Version 3:
+      * [Version 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=XmIlhzu6B9WR&line=3&uniqifier=1)
         * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 500
 
 # Results
