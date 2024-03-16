@@ -33,7 +33,7 @@ Overall ,the importance of this study comes from being able to create a model th
       * The feature `Course`, containing details of a course’s department and course number, was processed to separate out the department, course number, and course suffix into their own columns. These individual features were then label encoded into numeric values and appended to our dataset under the names `Department`, `Course Number` and `Course Suffix` respectively.
 
     * ### [Imputation:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=GmKH15rIsQAO)
-      * Prior to doing any imputing, our dataset contained missing values for the following features: ‘Study Hours Per Week’, ‘Average Grade Expected’, ‘Average Grade Received’
+      * Prior to doing any imputing, our dataset contained missing values for the following features: `Study Hours Per Week`, `Average Grade Expected`, `Average Grade Received`
       * The following strategy was used to impute missing values:
         > “For every observation with a missing value for feature X, create a value for X by taking all observations with the **same department, course number, and suffix** (the same class), taking the values reported for feature X, taking the average of them, and setting that as the imputed value for X.
       * This reduced the number of observations with missing values from 5989 to 84.
