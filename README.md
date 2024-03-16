@@ -6,7 +6,7 @@
 
 # **Introduction** 
 
-Our project leverages the power of artificial neural networks to investigate the relationship between various classroom metrics and their effects on college student success. Specifically, our project seeks to define a generalized model to predict how well students may perform in a college level course (as measured GPA) when provided data about the course.
+Our project leverages the power of deep neural networks to investigate the relationship between various classroom metrics and their effects on college student success. Specifically, our project seeks to define a generalized model to predict how well students may perform in a college level course (as measured GPA) when provided data about the course.
 
 As students ourselves, we feel that this project has a lot of value because the insights gained from it can directly impact our academic journeys and those of our peers. By understanding the factors that contribute to success in college courses, we can make more informed decisions about our education, such as selecting courses with favorable conditions that would result in us getting better grades. Additionally, the ability to predict student performance based on various metrics can provide course planners, professors, registrars, etc. with information on how to better improve student success in the classroom.
 
