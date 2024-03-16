@@ -2,6 +2,8 @@
 
 *[Link](https://drive.google.com/file/d/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe/view?usp=sharing) to Jupyter Notebook containing all the code and explanations (you must be logged into your UCSD account)*
 
+*Note: Embedded in each header of the writeup is a direct link to the corresponding header in the Jupyter Notebook*
+
 # **Introduction** 
 
 Our project leverages the power of deep neural networks to investigate the relationship between various classroom metrics and their effects on college student success. Specifically, our project seeks to define a generalized model to predict how well students may perform in a college level course (as measured GPA) when provided data about the course and its professor.
