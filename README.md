@@ -256,7 +256,11 @@ Overall, the importance of this study comes from being able to create a model th
     * Removed the pluses and minuses. It seems that in our initial classification model, there were too many classes, which may have hurt our model's performance. Intuitively, we know that the same class can have varying values for the average GPA received even when many aspects of the class remain the same as in previous quarters. To account for that variability, we reduced the number of classes to just A, B, and C. We can interpret them as follows: (A = high student success, B = average student success, C = poor student success )
     * Performed oversampling to increase representation of less represented letter grades (we noticed that there were much more observations with an average grade received value of B than A or C) post data processing for model 3.
 
-  * After doing this additional data preprocessing, we tried our previous configuration for model 3 again and saw that the accuracy improved significantly by about 20%. The new accuracy for model 3 now hovers at approximately 63-65%. Overall, we saw a significant improvement in the performance of model 3 by just simplifying the classes further and performing oversampling to handle the skew in our dataset. This really showed us the importance of evaluating the model and always taking a look back at the data to understand why a model might be performing in a specific way.
+  * After doing this additional data preprocessing, we tried our previous configuration for model 3 again and saw that the accuracy improved significantly by about 20%. The new accuracy for model 3 now hovers at approximately 60-65%. 
+   
+  * What's good is that our model also appears to not be overfitting to a significant degree. Looking at the training vs validation loss, it can be observed that the training and validation loss begin to converge and stabilize at a fixed value towards the end. Moreover, when evaluating training vs loss accuracy using classification report, our model appears to have similar performance (as measured by micro and macro average) for both training and testing data (we consistently saw values in the range of 60%-65%). While the accuracy number leaves a lot to be desired, at least it is better than our first attempt at building a classification DNN which had worse accuracy than a coin toss.
+
+  * Overall, we saw a significant improvement in the performance of model 3 by just simplifying the classes further and performing oversampling to handle the skew in our dataset. This really showed us the importance of evaluating the model and always taking a look back at the data to understand why a model might be performing in a specific way.
 
 * ## [Alternative Models:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=mOE8-sKjbVwQ)
   * Discussion for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing) 
@@ -280,9 +284,9 @@ That being said. we think that a bigger performance gain could be achieved if we
 
 ## Owen:
 - Wrote initial code for data preprocessing
-- Majority of READMEs for each milestone
-- Majority of code for training and evaluating DNN models
-- Commentary for DNN models in notebook
+- Wrote Majority of READMEs for each milestone
+- Wrote Majority of code for training and evaluating DNN models
+- Provided written commentary for DNN models in notebook
 - Final writeup: methods, results, and discussion for DNN models, data exploration, and data preprocessing (converted from Google Doc to README.md)
 
 ## Darryl:
