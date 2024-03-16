@@ -133,7 +133,7 @@ The importance of this study comes from being able to provide a model to guide a
         * Used sklearn's KNeighborsClassifier() to construct a KNN model with K = 500
 
 # Results
-* ## Data Exploration:
+* ## [Data Exploration:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=9Wgqiln8b2Gq)
   * df.info() revealed that most features in our dataset contained objects (strings) instead of numeric values
     * ![](images/results_info.png)
   * pd.describe() revealed that approximately 27% of our dataset had missing values
@@ -143,8 +143,8 @@ The importance of this study comes from being able to provide a model to guide a
   * Viewing the distribution of the values in each feature revealed the following skews
     * ![](images/results_dist.png)
   
-* ## Pre-Processing:
-    * ### Encoding:
+* ## [Pre-Processing](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ql2uSH6ICs2l)
+    * ### [Encoding:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ZC62Zdp8uKMJ)
       * Prior to encoding our dataset, the majority of the features contained objects as their value.
       * After encoding the features mentioned in the methods section, all of the features in the dataset were converted to either integers or floats
       * A before and after view of the dataset can be found below
@@ -152,16 +152,16 @@ The importance of this study comes from being able to provide a model to guide a
         * ![](images/results_encoding_before.png)
         * After:
         * ![](images/results_encoding_after.png)
-    * ### Imputation:
+    * ### [Imputation:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=GmKH15rIsQAO)
       * Applying the technique outlined in the methods section reduced the number of rows with missing data from 19,115 all the way to 0.
-    * ### Normalization:
+    * ### [Normalization:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=cg8WdV9-sDnQ)
       * Min Max normalization was applied to non-categorical columns. The resulting dataset can be seen below:
         * ![](images/results_normalization.png)
     * ### Dropped Columns:
       * The features `Instructor` and `Evaluation URL` were dropped from our dataset
       * The feature `Course` was dropped from the dataset after being processed and expanded into `Department`, `Course Number`, and `Course Suffix` features.
       * This was done while encoding the data. Thus, the previews of the dataset used to show the state of the dataset after the applying the different techniques exclude these values.
-* ## Model 1:
+* ## [Model 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=pEukt66cd708)
     * Training vs Validation Loss Graph:
       * ![](images/results_model1.png)
     * Training vs Test MSE:
@@ -169,7 +169,7 @@ The importance of this study comes from being able to provide a model to guide a
         MSE Train: 0.012811824793743347
         MSE Test: 0.012531321231611235
         ```
-* ## Model 2:
+* ## [Model 2:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=BwvoiCvqdqry)
     * Training vs Validation Loss Graph:
       * ![](images/results_model2.png)
     * Training vs Test MSE:
@@ -181,25 +181,25 @@ The importance of this study comes from being able to provide a model to guide a
       * ```
         array([0.00620253, 0.00730672, 0.00649318, 0.00584978, 0.00591005])
         ```
-* ## Model 3:
+* ## [Model 3]:(https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IPxG5OibLu_Q)
     * Training vs Validation Loss Graph:
       * ![](images/results_model3.png)
     * Training vs Test Classification Report:
       * ![](images/results_model3_t.png)
-* ## Alternative Models
-    * Graphs and figures for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing)
+* ## [Alternative Models:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=mOE8-sKjbVwQ)
+    * The writeup and graphs/figures for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing)
     * The results of the best models are displayed below for convenience:
-      * Regression
+      * ### [Regression:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=zNk0x94wefFW&line=1&uniqifier=1)
         * Utilizing a degree of 4 produces a model with a test MSE loss of 0.07478621
-      * KNN
+      * ### [KNN:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=8OI-xsyRevky&line=1&uniqifier=1)
         * Utilizing K = 50 yields a model with an accuracy score of 0.7852915647439438 for test data
 # Discussion
-* ## Data Exploration:
+* ## [Data Exploration:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=9Wgqiln8b2Gq)
 * As our goal is to build a DNN that predicts student grades, we felt that it was first important to explore our dataset to find any correlations between other features and our target so that we could determine what inputs to include in our model. Thus, we made use of the corr() method in pandas to compute the correlation coefficient between all the features in our dataset and plotted them using heatmap() from seaborn with a diverging color scale. This made it easy to visually spot which features were more strongly correlated with “Average GPA Received” and whether the association was positive or negative. After doing so, we identified that the features “Average Grade Expected”, “Study hours per week”, “Percentage Recommended Class”, “Percentage Recommended Professor” had strong or medium levels of correlation with our target, which gave us our inputs.
 > * Note: we also decided to consider the feature “Total Enrolled In Class” as an input even though it had a weak negative correlation (-0.22) with our target. This came from discussion about whether or not students generally do better in smaller courses or ones with a larger amount of students. Thus, we felt that it was a good idea to also include it as a possible input for our model. In retrospect, we probably should have only selected features with a medium or strong correlation to our target feature as that would’ve likely made it easier for our model to achieve better predictive performance (by eliminating noise caused by features that aren’t that “useful”).
 
-* ## Pre-Processing:
-    * ### Encoding:
+* ## [Pre-Processing:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ql2uSH6ICs2l)
+    * ### [Encoding:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=ZC62Zdp8uKMJ)
       * Encoding was performed because the majority of the features in our dataset contained strings as values. Thus, in order to use them as inputs for our models, we needed to turn them into numbers first. Fortunately, many of them were easy to convert into a numeric value because the number we wanted was already contained within the string. This meant that we were able to write some RegEx to extract the numeric values we needed from the problematic columns. We then overwrote those columns with their extracted numeric values. This was applied to the columns `Percentage Recommended Class`, `Percentage Recommended Professor`, `Average Grade Expected` and `Average Grade Received`.
 
       While these were the only features we really needed to encode, we figured that we might as well encode some extra features in the dataset in case we needed to use them later (which we did). This led us down a path to encode the `Quarter` and `Course` feature, which was a bit more complicated. 
@@ -208,11 +208,11 @@ The importance of this study comes from being able to provide a model to guide a
 
       To encode `Course` we observed that entries for this feature were basically all in the format Department + Course Number + Course Name. Since we really only needed the department name and course number to identify a class, we realized that we could just ignore the course name. This meant that we could encode values in `Course` by separating out the department and the course numbers into their own columns (`Department` and `Course Numbers` respectively). However, since some courses had a suffix assigned to them (MATH 20A), we also had to extract that too and create a new column, `Course Suffix`. As with before, this was achieved with RegEx. From there, the course numbers themselves could safely just be converted into integers, but we had to encode the department and suffixes as they were entirely strings. Since there were quite a few departments and suffixes, we just label encoded them by assigning a numeric value to each based on their lexicographic ordering instead of doing one hot encoding to reduce the number of features in our dataset.
 
-    * ### Imputation:
+    * ### [Imputation:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=GmKH15rIsQAO)
       * The choice to try to impute missing data was driven by the discovery that around ~27% of our dataset contained missing values. While we considered dropping them since our dataset was sufficiently large enough, we decided to try to impute as many entries as possible before resorting to dropping.
       * Once we learned that the bulk of the missing values were for the columns ‘Average Grade Expected and “Average Grade Received” we reasoned that we could fill those values by looking at other instances of the same class (as identified by having the same department number, course number, and course suffix) and replace the missing value with the average of the values from said classes. This technique managed to reduce the number of observations with missing values to <10% of our dataset. While we figured we could just stop there, we decided to look a bit further into it in between milestones and discovered that some classes only occurred for one instance. This meant that we couldn’t compute a value to replace the missing one. Fortunately, we realized we could just utilize the same technique as before, but with a slight modification. While less ideal, we could just look at other classes in the entire department and generate any replacement value by averaging the values observed in said classes. Failing that (i.e. if the department only had the class with the missing value) the entire dataset,we could still compute a value by taking the average of all the values for the feature with a missing value. This basically served as a catch all filter that imputed all of the data with missing values in our dataset! Thus, we were able to avoid the need to drop any entries from our dataset.
 
-    * ### Normalization:
+    * ### [Normalization:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=cg8WdV9-sDnQ)
       * We chose to min-max normalize non-label values in our dataset as it was mentioned in class that normalizing data was necessary if we ever needed to perform stochastic gradient descent optimization since it is sensitive to scale.
 
       * The decision to choose min-max normalization in particular was made because some of our features already appeared to be min max normalized once we converted them into numeric values (“Percentage Recommended Class” and "Percentage Recommended Professor all had values between 0 and 1), thus we figured we might as well choose to min max normalize the rest of our data.
@@ -221,12 +221,12 @@ The importance of this study comes from being able to provide a model to guide a
       * The features “Instructor and Evaluation URL” were dropped from our dataset. This was because “Evaluation URL” just contained links to the CAPEs report that corresponded to a particular entry. While the report had a bit more information that wasn’t in the dataset, what we had already contained all the key information pertaining to class and enrollment demographics, which is what we were interested in in the first place. 
       * Additionally, we felt that it was appropriate to exclude instructor names from our analysis for privacy and ethical reasons. This is because our goal is to develop a model that the school and other students can use to understand and improve student success (as measured by grades) and we wouldn't want a particular professor to have an influence on our model as that might lead to favoritism or other workplace related issues. Since we already have a measure of how much the students like their professor in Percentage Recommended Professor, we figured we could safely strip away the name and just have a measure of how much students enjoy their professor without having any names attached.
 
-* ## Model 1:
+* ## [Model 1:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=pEukt66cd708)
   * We decided to go with a simple dense, sequential model much like what we’ve been developing in the HWs for this class. The primary reason for this was to get us started with something familiar that we could all debug if anything went wrong. Likewise many of the design choices for the model were made using observations we’ve seen from neural networks throughout the quarter. For instance, we chose to use the relu function for all hidden layers as it seems that it is often the go-to default activation function for most DNNs. Likewise, looking at figures of DNNs shown in class revealed that many had a decreasing number of nodes in each layer. After looking into this, we discovered that doing so was generally associated with better performance so we incorporated that idea into our first model. Since our model was aimed at doing regression, we took what we learned from HW2 and compiled it using the ‘mse’ loss function, which is commonly used for DNNs performing regression. Admittedly, the optimizer (adam) was a bit of a random choice, but we would later discover when we performed hyperparameter tuning that all of the best results used that particular optimizer, so we may have lucked out in that regard.
   
   * We evaluated our model’s performance by comparing the model’s training and test loss as well as by plotting the training vs validation loss during the model’s training. This gave us a good idea if overfitting was occurring because if the training loss was significantly lower than the test or validation loss, there is a good chance that our model was overfit to the training data. After doing so we learned that our training vs test loss was surprisingly similar, which was a good sign that our model was generalizing well, but when we looked at our training vs validation loss graph, it looked a bit strange. As expected, the training loss decreases rapidly at the beginning and starts to stabilize, but our validation loss appears to stay flat. While this would normally be considered overfitting, the validation loss stays flat at the value where the training loss converges to. This meant that by the time our model was done training, it performed about the same with the training data as it did with the validation data. This was further verified when we evaluated the test loss, which was also shockingly similar to this value. This suggested to us that our model was not overfitting.
 
-* ## Model 2:
+* ## [Model 2:](x)
   * It seemed from the writeup that model 2 was meant to be an iterative improvement over model 1, so we performed a hyperparameter sweep over the activation functions and optimizer for model 1 in a quest to further reduce our mse loss. The reason we chose to optimize just the activation functions and optimizer was primarily due to time. As the number of distinct combinations of parameters grows exponentially with the more features we choose to tune, we were limited in what we could do with the Google Colab environment (tuning the activation functions and optimizer meant that we already had 6 parameters to tune, each of which could have multiple options to choose from). Ultimately, we settled on just choosing between two activation functions, relu and tanh for each layer as:
       * Experimentation with sigmoid (not shown in notebook) generally appeared to result in worse loss than what we saw in model 1
       * We learned that linear is generally worse than relu as relu introduces non-linearity
@@ -237,7 +237,7 @@ The importance of this study comes from being able to provide a model to guide a
 
   * To evaluate our model’s performance, we did the same things as model 1, but also performed k-fold cross validation to further evaluate overfitting since we observed a large improvement to our loss after hyperparameter tuning. Comparing training vs test error revealed that our model was performing quite similarly to unseen data as it did with seen data. Moreover, the results of the k-fold validation with 5 folds revealed that the mse across the 5 splits did not differ greatly from each other. This tells us that our model still generalizes well to new data. Furthermore, looking at the training vs validation loss graph shows that as the training loss decreases with respect to epochs, the validation loss follows suit. This time, however, the reduction in loss is much more gradual, which fits how we’d expect the loss to decrease in each iteration anyways. As with model 1, the loss for both training and validation data appears to converge at a similar value at the end of the training, which suggests that it is not overfitting the training data as well.
 
-* ## Model 3:
+* ## [Model 3:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=IPxG5OibLu_Q)
   * For model 3, we wanted to experiment with the difference between using a different loss function compared to the other models. Because we are dealing with a classification problem, we wanted to see what would happen if we used a different type of loss function meant for categorization and what effect it would have on the accuracy. Overall, our goal with each model is to make changes that would ultimately help us develop the best model possible. For this one, we set it up as a DNN that uses categorical cross entropy with accuracy being a part of the metrics. Using categorical cross entropy, we also made sure that the output layer used softmax as an activation function and had the number of classes, in this case the classes were the grades received, as the number of neurons. This was a significant change compared to the other models. We also wanted to find the best set of activation functions so we used hyperparameter tuning. However, after we set up the model and evaluated the results, we saw that the model had originally performed worse and had a low accuracy around 40%. It did a worse job than just randomly guessing. The loss was also much higher than what we observed in the previous models.
 
   * To attempt to fix the accuracy, we did some more data preprocessing. Looking into the data further, we saw that the data set is pretty unbalanced for a classification problem. We missed this in the main data preprocessing section because we were not considering classes in our target variable. Now that we are though, this presents an issue.
@@ -250,7 +250,7 @@ The importance of this study comes from being able to provide a model to guide a
 
   * After doing this additional data preprocessing, we tried model 3 again and the accuracy improved significantly by about 20%. The new accuracy for model 3 is approximately 63-65%. Overall, we saw a significant improvement in the performance of model 3 where we used categorical cross entropy as the loss function when we simplified the classes further and performed oversampling along with hyperparameter tuning. This really showed us the importance of evaluating the model and always taking a look back at the data to understand why a model might be performing in a specific way.
 
-* ## Alternative Models
+* ## [Alternative Models:](https://colab.research.google.com/drive/1fSYLGAT1rz91a4LCf_CJ20AT7SilrLFe?authuser=1#scrollTo=mOE8-sKjbVwQ)
   * Discussion for our alternative models can be found [here](https://docs.google.com/document/d/180wuSjsLb7TfzJrvCK-ozx-NGKtKmpJtxVN_tb7Ghd8/edit?usp=sharing) 
 
   * A summary comparing the results of said models to our DNNs has been provided below:
