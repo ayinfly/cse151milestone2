@@ -36,13 +36,9 @@ Overall ,the importance of this study comes from being able to create a model th
       * Prior to doing any imputing, our dataset contained missing values for the following features: `Study Hours Per Week`, `Average Grade Expected`, `Average Grade Received`
       * The following strategy was used to impute missing values:
         > “For every observation with a missing value for feature X, create a value for X by taking all observations with the **same department, course number, and suffix** (the same class), taking the values reported for feature X, taking the average of them, and setting that as the imputed value for X.
-      * This reduced the number of observations with missing values from 5989 to 84.
 
       * For any remaining observations with missing values, the following strategy was used:
         > “For every observation with a missing value for feature X, create a value for X by looking at all observations within the same **department**, then taking the values reported for feature X, taking the average of them, and setting that as the imputed value for X. If this is not possible, take the average of all observations in the data set for feature X and replace the missing value with that"
-      * For any observation that are still missing values, this final strategy was used:
-        > "For every observation with a missing value for feature X, create a value for X by taking all observations, taking the values reported for feature X, taking the average of them, and setting that as the imputed value for X"
-      * This reduced the number of observations with missing values from 342 to 0.
         
       * The following features were impacted by imputation: `Study Hours per Week`, `Average Grade Expected`, and `Average Grade Received`
 
